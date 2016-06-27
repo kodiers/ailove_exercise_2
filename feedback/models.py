@@ -35,7 +35,7 @@ class Message(models.Model):
     surname = models.CharField(max_length=50)
     subject = models.CharField(max_length=255)
     text = models.TextField()
-    image = models.ImageField(upload_to='images', validators=[validate_image], null=True, blank=True)
+    image = models.ImageField(upload_to='images', null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
