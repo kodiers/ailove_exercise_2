@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ subject }}</title>
+</head>
+<body>
+    <div>
+        {% if reply %}
+            <h1>Support reply:</h1>
+            {{ reply.text|safe }}
+        {% endif %}
+        <h1>{% if reply %}Your message was: {% else %}New message {% endif %}: {{ subject }}</h1>
+        <p>Message from: {{ full_name }}</p>
+        <p>Author email: {{ sender_email }}</p>
+        <p>Author phone: {{ phone }}</p>
+        <h2>Message text:</h2>
+        <p>{{ notification|safe }}</p>
+    </div>
+</body>
+</html>
