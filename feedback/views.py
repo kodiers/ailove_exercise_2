@@ -64,14 +64,17 @@ def create_message(request):
         message.surname = request.POST.get('surname')
         message.phone = request.POST.get('phone')
     message.subject = request.POST.get('subject')
-    message.text = request.POST['text']
+    message.text = request.POST.get('text')
     if 'image' in request.FILES and request.FILES['image'] is not None:
         try:
             validate_image(request.FILES['image'])
             message.image = request.FILES['image']
         except ValidationError as e:
             return JsonResponse({'error': e.error_list[0].message})
-    message.save()
+    try:
+        message.save()
+    except Exception:
+        return JsonResponse({'error':'Incorrect parameters'})
     send_email_task(message)
     serializer = MessageSerializer(message)
     return JsonResponse(serializer.data)
